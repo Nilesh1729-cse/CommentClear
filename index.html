@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CommentClear — Strip Code Comments Instantly</title>
+  <meta name="description" content="Paste your code and instantly remove all comments. Supports JavaScript, Python, C++, Java, CSS, HTML, and more with auto language detection." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- Header -->
+  <header class="header">
+    <div class="header-inner">
+      <div class="logo">
+        <svg class="logo-icon" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect width="36" height="36" rx="8" fill="var(--accent)"/>
+          <path d="M10 12h6M10 18h10M10 24h4" stroke="#0a0a0a" stroke-width="2.5" stroke-linecap="round"/>
+          <path d="M22 20l3-3-3-3M28 17h-3" stroke="#0a0a0a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <span class="logo-text">CommentClear</span>
+      </div>
+      <nav class="nav">
+        <a href="#tool" class="nav-link">Tool</a>
+        <a href="#about" class="nav-link">About</a>
+        <a href="https://github.com/Nilesh1729-cse/commentclear" target="_blank" class="nav-link nav-github">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
+          GitHub
+        </a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-bg-grid"></div>
+    <div class="container">
+      <div class="badge">✦ Free &amp; Open Source</div>
+      <h1 class="hero-title">Strip Code Comments<br/><span class="accent-text">Instantly.</span></h1>
+      <p class="hero-sub">Paste your code. Choose your language. Get clean output in one click.<br/>Supports 10+ languages with auto-detection.</p>
+      <a href="#tool" class="cta-btn">Try It Now ↓</a>
+    </div>
+    <div class="hero-scroll-hint">scroll</div>
+  </section>
+
+  <!-- Tool Section -->
+  <section class="tool-section" id="tool">
+    <div class="container">
+
+      <!-- Language & Settings Bar -->
+      <div class="toolbar">
+        <div class="toolbar-left">
+          <label class="toolbar-label">Language</label>
+          <div class="select-wrap">
+            <select id="languageSelect" class="lang-select">
+              <option value="auto">Auto Detect</option>
+              <option value="javascript">JavaScript / TypeScript</option>
+              <option value="python">Python</option>
+              <option value="c">C / C++</option>
+              <option value="java">Java</option>
+              <option value="csharp">C#</option>
+              <option value="css">CSS / SCSS</option>
+              <option value="html">HTML</option>
+              <option value="ruby">Ruby</option>
+              <option value="php">PHP</option>
+              <option value="go">Go</option>
+              <option value="swift">Swift</option>
+              <option value="rust">Rust</option>
+              <option value="bash">Bash / Shell</option>
+            </select>
+            <span class="select-arrow">▾</span>
+          </div>
+          <div class="detected-lang" id="detectedLang"></div>
+        </div>
+        <div class="toolbar-right">
+          <label class="toggle-wrap" title="Keep blank lines after removal">
+            <input type="checkbox" id="keepBlankLines" checked />
+            <span class="toggle-track"><span class="toggle-thumb"></span></span>
+            <span class="toggle-label">Keep blank lines</span>
+          </label>
+          <label class="toggle-wrap" title="Trim trailing whitespace">
+            <input type="checkbox" id="trimWhitespace" />
+            <span class="toggle-track"><span class="toggle-thumb"></span></span>
+            <span class="toggle-label">Trim whitespace</span>
+          </label>
+        </div>
+      </div>
+
+      <!-- Editor Panels -->
+      <div class="editors">
+        <div class="editor-pane">
+          <div class="pane-header">
+            <span class="pane-title">Input</span>
+            <div class="pane-actions">
+              <span class="line-count" id="inputLines">Ln 1  Ch 0</span>
+              <button class="pane-btn" id="pasteBtn" title="Paste from clipboard">Paste</button>
+              <button class="pane-btn danger" id="clearInputBtn" title="Clear input">Clear</button>
+            </div>
+          </div>
+          <div class="editor-wrap">
+            <textarea id="inputCode" class="code-area" placeholder="// Paste your code here...
+/* All comments will be removed */
+const hello = 'world'; // inline comment
+function greet() {
+  /* block
+     comment */
+  return hello;
+}" spellcheck="false"></textarea>
+          </div>
+        </div>
+
+        <div class="editor-divider">
+          <button class="clean-btn" id="cleanBtn">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            Clean
+          </button>
+        </div>
+
+        <div class="editor-pane">
+          <div class="pane-header">
+            <span class="pane-title">Output</span>
+            <div class="pane-actions">
+              <span class="line-count" id="outputLines">Ln 1  Ch 0</span>
+              <button class="pane-btn" id="copyBtn" title="Copy to clipboard">Copy</button>
+              <button class="pane-btn" id="downloadBtn" title="Download file">Download</button>
+            </div>
+          </div>
+          <div class="editor-wrap">
+            <textarea id="outputCode" class="code-area output-area" placeholder="// Clean output will appear here..." readonly spellcheck="false"></textarea>
+          </div>
+        </div>
+      </div>
+
+      <!-- Stats Bar -->
+      <div class="stats-bar" id="statsBar" style="display:none">
+        <span class="stat"><span class="stat-num" id="statRemoved">0</span> comments removed</span>
+        <span class="stat-sep">·</span>
+        <span class="stat"><span class="stat-num" id="statLines">0</span> lines saved</span>
+        <span class="stat-sep">·</span>
+        <span class="stat"><span class="stat-num" id="statChars">0</span> chars stripped</span>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- About Section -->
+  <section class="about-section" id="about">
+    <div class="container">
+      <div class="about-grid">
+        <div class="about-col">
+          <h2 class="section-title">What Are Code Comments?</h2>
+          <p>Comments are annotations embedded in source code, ignored by compilers and interpreters. They help humans understand the <em>why</em> behind code decisions.</p>
+          <p>There are two main types found in most languages:</p>
+          <div class="comment-types">
+            <div class="type-card">
+              <div class="type-icon">// </div>
+              <div>
+                <strong>Line Comments</strong>
+                <p>Start with a symbol (like <code>//</code>) and comment everything to the end of the line.</p>
+              </div>
+            </div>
+            <div class="type-card">
+              <div class="type-icon">/* */</div>
+              <div>
+                <strong>Block Comments</strong>
+                <p>Wrapped between start and end delimiters — can span multiple lines.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="about-col">
+          <h2 class="section-title">When to Remove Comments</h2>
+          <div class="tip-list">
+            <div class="tip bad">
+              <span class="tip-badge">✗ Redundant</span>
+              <pre><code>// increment counter
+counter++;</code></pre>
+            </div>
+            <div class="tip good">
+              <span class="tip-badge">✓ Useful</span>
+              <pre><code>// Debounce prevents duplicate
+// API calls while typing
+const search = debounce(fn, 300);</code></pre>
+            </div>
+            <div class="tip bad">
+              <span class="tip-badge">✗ Misleading</span>
+              <pre><code>// Parse XML response
+const d = JSON.parse(res);</code></pre>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Supported Languages -->
+      <div class="lang-grid-section">
+        <h2 class="section-title center">Supported Languages</h2>
+        <div class="lang-pills">
+          <span class="lang-pill">JavaScript</span>
+          <span class="lang-pill">TypeScript</span>
+          <span class="lang-pill">Python</span>
+          <span class="lang-pill">C / C++</span>
+          <span class="lang-pill">Java</span>
+          <span class="lang-pill">C#</span>
+          <span class="lang-pill">CSS / SCSS</span>
+          <span class="lang-pill">HTML</span>
+          <span class="lang-pill">Ruby</span>
+          <span class="lang-pill">PHP</span>
+          <span class="lang-pill">Go</span>
+          <span class="lang-pill">Swift</span>
+          <span class="lang-pill">Rust</span>
+          <span class="lang-pill">Bash</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Quiz Section -->
+  <section class="quiz-section">
+    <div class="container">
+      <h2 class="section-title center">Clean Code Quiz</h2>
+      <p class="section-sub center">Test your knowledge of clean code practices.</p>
+      <div class="quiz-card" id="quizCard">
+        <div class="quiz-progress">
+          <div class="quiz-progress-bar" id="quizProgressBar" style="width: 20%"></div>
+        </div>
+        <div class="quiz-question-num" id="quizNum">Question 1 / 5</div>
+        <div class="quiz-question" id="quizQuestion">Loading...</div>
+        <div class="quiz-options" id="quizOptions"></div>
+        <div class="quiz-feedback" id="quizFeedback"></div>
+        <button class="quiz-next" id="quizNext" style="display:none">Next →</button>
+      </div>
+      <div class="quiz-result" id="quizResult" style="display:none">
+        <div class="result-score" id="resultScore"></div>
+        <div class="result-msg" id="resultMsg"></div>
+        <button class="cta-btn" id="retakeBtn">Retake Quiz</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div class="logo">
+        <svg class="logo-icon" viewBox="0 0 36 36" fill="none"><rect width="36" height="36" rx="8" fill="var(--accent)"/><path d="M10 12h6M10 18h10M10 24h4" stroke="#0a0a0a" stroke-width="2.5" stroke-linecap="round"/><path d="M22 20l3-3-3-3M28 17h-3" stroke="#0a0a0a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <span class="logo-text">CommentClear</span>
+      </div>
+      <p class="footer-text">© 2025 CommentClear. Open source. MIT License.</p>
+      <a href="https://github.com/Nilesh1729-cse/commentclear" target="_blank" class="footer-gh">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
+        View on GitHub
+      </a>
+    </div>
+  </footer>
+
+  <div class="toast" id="toast"></div>
+
+  <script src="app.js"></script>
+</body>
+</html>
