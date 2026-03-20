@@ -4,8 +4,7 @@
 
 A fast, browser-based tool to remove comments from source code. Paste your code, choose (or auto-detect) your language, and get clean output in one click.
 
-**[🚀 Live Demo →](https://nilesh1729-cse.github.io/commentclear)**
-
+**[🚀 Live Demo →](https://nilesh1729-cse.github.io/CommentClear/)**
 ---
 
 ## Features
