@@ -4,7 +4,7 @@
 
 A fast, browser-based tool to remove comments from source code. Paste your code, choose (or auto-detect) your language, and get clean output in one click.
 
-**[🚀 Live Demo →](https://github.com/Nilesh1729-cse/commentclear)**
+**[🚀 Live Demo →](https://nilesh1729-cse.github.io/commentclear)**
 
 ---
 
@@ -49,7 +49,7 @@ A fast, browser-based tool to remove comments from source code. Paste your code,
 No build step required! Just open the file:
 
 ```bash
-git clone https://github.com/YOUR_USERNAME/commentclear.git
+git clone https://github.com/Nilesh1729-cse/commentclear.git
 cd commentclear
 open index.html   # macOS
 # or
@@ -61,7 +61,7 @@ xdg-open index.html   # Linux
 
 1. Push to GitHub (instructions below)
 2. Go to **Settings → Pages → Source: Deploy from branch → main / root**
-3. Your site will be live at `https://YOUR_USERNAME.github.io/commentclear`
+3. Your site will be live at `https://nilesh1729-cse.github.io/commentclear`
 
 ---
 
@@ -73,7 +73,7 @@ git init
 git add .
 git commit -m "initial commit: CommentClear"
 git branch -M main
-git remote add origin https://github.com/YOUR_USERNAME/commentclear.git
+git remote add origin https://github.com/Nilesh1729-cse/commentclear.git
 git push -u origin main
 ```
 
@@ -91,3 +91,6 @@ commentclear/
 
 ---
 
+## License
+
+MIT — free to use, modify, and share.
